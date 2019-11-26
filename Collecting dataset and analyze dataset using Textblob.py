@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 # Add your Twitter API credentials
 consumer_key = ""
 consumer_secret = ""
@@ -14,7 +8,7 @@ auth = tw.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tw.API(auth, wait_on_rate_limit=True)
 
-#I will search all the words with dataset
+#Searching all the Tweets containing "Hong Kong" from 2019/11/17 to 2019/11/25
 search_term = "hong+kong -filter:retweets"
 tweets = tw.Cursor(api.search,
                    q=search_term,
@@ -31,7 +25,7 @@ tweets_no_urls = [remove_url(tweet.text) for tweet in tweets]
 # Create textblob objects of the tweets ()
 sentiment_objects = [TextBlob(tweet) for tweet in tweets_no_urls]
 
-# Create list of polarity valuesx and tweet text
+# Create list of polarity values and tweet text
 sentiment_values = [[tweet.sentiment.polarity, str(tweet)] for tweet in sentiment_objects]
 
 # Create dataframe containing the polarity value and tweet text
